@@ -1,0 +1,14 @@
+<!-- upload_file.html -->
+
+{% extends "base.html" %}
+{% block content %}
+<h1>Upload BED File</h1>
+<form method="POST" action="{{ url_for('upload') }}" enctype="multipart/form-data">
+  <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+  <div class="form-group">
+    <label for="fileInput">Select File:</label>
+    <input type="file" id="fileInput" name="file" class="form-control" required>
+  </div>
+  <button type="submit" class="btn btn-primary mt-3">Submit</button>
+</form>
+{% endblock %}

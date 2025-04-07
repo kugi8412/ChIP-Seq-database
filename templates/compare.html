@@ -1,0 +1,34 @@
+<!-- compare.html -->
+
+{% extends "base.html" %}
+{% block content %}
+<h2>Compare BED Files</h2>
+<form method="POST" enctype="multipart/form-data">
+  <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+  <div class="form-group">
+    <label>Select existing file:</label>
+    <select class="form-control" name="existing_file">
+      <option value="">-- None --</option>
+      {% for file in files %}
+      <option value="{{ file.id }}">{{ file.filename }}</option>
+      {% endfor %}
+    </select>
+  </div>
+  <div class="form-group">
+    <label>Or upload a new file:</label>
+    <input type="file" class="form-control" name="file">
+  </div>
+  <div class="form-group">
+    <label>Upload option:</label>
+    <select class="form-control" name="upload_option">
+      <option value="temp">Temporary</option>
+      <option value="permanent">Permanent</option>
+    </select>
+  </div>
+  <div class="form-group">
+    <label>How many top similar files?</label>
+    <input type="number" class="form-control" name="N" value="3">
+  </div>
+  <button class="btn btn-primary">Compare</button>
+</form>
+{% endblock %}

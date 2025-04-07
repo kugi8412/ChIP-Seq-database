@@ -1,0 +1,37 @@
+<!-- results.html -->
+
+{% extends "base.html" %}
+{% block content %}
+<h2>Comparison Results</h2>
+<h4>Identical Files</h4>
+<ul class="list-group">
+  {% for result in results.identical %}
+  <li class="list-group-item list-group-item-success">
+    {{ result.filename }} - <strong>Jaccard: {{ result.jaccard }}</strong> <span class="badge badge-success">Identical</span>
+  </li>
+  {% else %}
+  <li class="list-group-item">None</li>
+  {% endfor %}
+</ul>
+<h4 class="mt-4">Top N Similar Files</h4>
+<ul class="list-group">
+  {% for result in results.others %}
+  <li class="list-group-item">
+    {{ result.filename }} - <strong>Jaccard: {{ result.jaccard }}</strong>
+  </li>
+  {% else %}
+  <li class="list-group-item">No matches found</li>
+  {% endfor %}
+</ul>
+{% endblock %}
+
+<!-- JavaScript -->
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  const identicalTags = document.querySelectorAll('.list-group-item-success');
+  identicalTags.forEach(tag => {
+    tag.style.fontWeight = 'bold';
+    tag.style.border = '2px solid green';
+  });
+});
+</script>
